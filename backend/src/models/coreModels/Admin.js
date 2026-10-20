@@ -10,6 +10,11 @@ const adminSchema = new Schema({
     type: Boolean,
     default: false,
   },
+  tenant: {
+    type: mongoose.Schema.ObjectId,
+    ref: 'Tenant',
+    index: true,
+  },
 
   email: {
     type: String,
