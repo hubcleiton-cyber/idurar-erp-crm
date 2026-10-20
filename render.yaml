@@ -1,0 +1,28 @@
+services:
+  - type: web
+    name: idurar-fiscal-demo
+    runtime: node
+    plan: free
+    region: virginia
+    buildCommand: npm ci --prefix backend && npm ci --prefix frontend && npm run build --prefix frontend
+    startCommand: cd backend && npm run bootstrap && npm start
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_VERSION
+        value: 20.9.0
+      - key: NODE_ENV
+        value: production
+      - key: DATABASE
+        sync: false
+      - key: JWT_SECRET
+        generateValue: true
+      - key: FISCAL_DATA_HASH_KEY
+        generateValue: true
+      - key: BOOTSTRAP_ADMIN_EMAIL
+        sync: false
+      - key: BOOTSTRAP_ADMIN_PASSWORD
+        sync: false
+      - key: BOOTSTRAP_ADMIN_NAME
+        value: Administrador
+      - key: TENANT_NAME
+        value: Demonstracao Fiscal
